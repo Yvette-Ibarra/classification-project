@@ -47,7 +47,15 @@ My initial hypothesis is that high monthly charges cause for a Telco customer to
 | --- | --- |
 | Gender | Whether a customer is male or female |
 | Senior Citizen | Whether a customer is Senior Citizen (1) or not (0)|
+| Partner | Whether the customer has a partner or not (Yes, No)|
+| Dependents | Whether the customer has dependents or not (Yes, No) |
+| Tenure | Number of months the customer has stayed with the company |
+| PhoneService | Whether the customer has a phone service or not (Yes, No)|
+| MultipleLines | Whether the customer has multiple lines or not (Yes, No, No phone service)|
+| InternetService | Customer’s internet service provider (DSL, Fiber optic, No)|
+| OnlineSecurity | Whether the customer has online security or not (Yes, No, No internet service) |
 | Additional Features | Encoded and values for categorical data and scaled versions continuous data|
+
 
 
 
