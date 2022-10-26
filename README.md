@@ -24,7 +24,7 @@ My initial hypothesis is that high monthly charges cause for a Telco customer to
   * Answer the following initial questions
     * How often does churn occur?
     * Does having a high monthly charge affect churn?
-    * Is beign a senior citizen affact churn?
+    * Do Senior Citizens churn more than non-Senior Citizens?
     * Does tenure affect churn?
     * Does the contract type of customer affect churn?
    
