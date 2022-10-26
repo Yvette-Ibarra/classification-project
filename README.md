@@ -45,8 +45,9 @@ My initial hypothesis is that high monthly charges cause for a Telco customer to
 
 | Feature | Definition |
 | --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+| Gender | Whether a customer is male or female |
+| Senior Citizen | Whether a customer is Senior Citizen (1) or not (0)|
+| Additional Features | Encoded and values for categorical data and scaled versions continuous data|
 
 
 
