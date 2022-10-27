@@ -25,8 +25,10 @@ My initial hypothesis is that high monthly charges cause for a Telco customer to
     * How often does churn occur?
     * Does having a high monthly charge affect churn?
     * Do Senior Citizens churn more than non-Senior Citizens?
+    * Do Senior Citizens pay more monthly charges that non Senior Citizens?
     * Does tenure affect churn?
     * Does the contract type of customer affect churn?
+    * Does gender influence churn?
    
   
     
