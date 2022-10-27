@@ -36,14 +36,17 @@ def get_ttest_monthly_charges(df):
 
     # high p-value suggests that the populations have equal variances
     if pval < 0.05:
-        variance = True
-    else:
         variance = False
+    else:
+        variance = True
 
- 
+    # set alpha to 0.05
     alpha = 0.05
 
-    t_stat, p_val = stats.ttest_ind(subset_churn.monthly_charges, subset_notchurn.monthly_charges, equal_var = True, random_state=123)
+    # perform T-test
+    t_stat, p_val = stats.ttest_ind(subset_churn.monthly_charges, subset_notchurn.monthly_charges, equal_var = variance, random_state=123)
+   
+    # Round and print results
     t_stat = t_stat.round(4)
     p_val = p_val.round(4)
     print(f' t-stat:{t_stat}')
@@ -63,3 +66,52 @@ def get_bar_senior(df):
     plt.title('Overlay senior vs churn')
     sns.countplot(x=df.senior_citizen, data=df, hue = 'churn',dodge=False,palette='cubehelix')
     plt.show()
+
+def get_chi2_senior(df):    
+    # Chi-Square test to compare two categorical variables (senior citizen status, churn)
+
+    alpha = 0.05
+
+    # Setup a crosstab of observed 
+    observed = pd.crosstab(df.senior_citizen==1, df.churn)
+
+    chi2, p, degf, expected = stats.chi2_contingency(observed)
+
+    chi2 = chi2.round(4)
+    p = p.round(4)
+    print(f' t-stat:{chi2}')
+    print(f' p-value:{p}')
+
+def get_boxplot_tenure(df):    
+    plt.title('Tenure vs Churn')
+    sns.boxplot(y=df.tenure, x=df.churn,palette='cubehelix',whis=np.inf);
+
+def get_ttest_tenure(df):
+    
+    # create two independent sample group of customers: churn and not churn.
+    subset_churn =df[df.churn=='Yes']
+    subset_notchurn = df[df.churn =='No']
+
+    # # stats Levene test - returns p value. small p-value means unequal variances
+    stat, pval =stats.levene(subset_churn.tenure, subset_notchurn.tenure)
+
+
+    # high p-value suggests that the populations have equal variances
+    if pval < 0.05:
+        variance = False
+        print('False')
+    else:
+        variance = True
+        print('True')
+
+    # set alpha to 0.05
+    alpha = 0.05
+
+    # perform t-test
+    t_stat, p_val = stats.ttest_ind(subset_churn.tenure, subset_notchurn.tenure, equal_var = variance,random_state=123)
+    
+    # round  and print results
+    t_stat = t_stat.round(4)
+    p_val = p_val.round(4)
+    print(f' t-stat:{t_stat}')
+    print(f' p-value:{p_val}')
