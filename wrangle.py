@@ -56,29 +56,6 @@ def get_telco_data():
     return df
 
 
-def telco_clean(df):
-    '''
-    This function takes in dataframe and 
-    drops columns:'payment_type_id', 'internet_service_type_id', 'contract_type_id''customer_id 
-    Removes 11 observations of white space in the total charges and changes
-    total charges column to numeric type
-    '''
-
-    # drop columns with redundant information 'payment_type_id', 'internet_service_type_id', 'contract_type_id' 
-    # drop columns with unuseful information 'customer_id'
-
-    df = df.drop(columns=['payment_type_id', 'internet_service_type_id', 'contract_type_id','customer_id'])
-
-    # remove 11 observations in total_charges that have null values and convert to numeric type
-    df = df[df.total_charges != ' ']
-
-    # convert column to numeric type
-    df.total_charges = df.total_charges.astype('float')
-    
-    #convert total_charges to numeric data
-    df.total_charges = df.total_charges.replace(' ', np.nan).astype(float)
-   
-    return df
 
 def prep_telco(df):
     '''
@@ -97,7 +74,8 @@ def prep_telco(df):
     # drop columns with redundant information 'payment_type_id', 'internet_service_type_id', 'contract_type_id' 
     # drop columns with unuseful information 'customer_id'
 
-    df = df.drop(columns=['payment_type_id', 'internet_service_type_id', 'contract_type_id','customer_id'])
+    df = df.drop(columns=['payment_type_id', 'internet_service_type_id', 'contract_type_id'])
+    
 
     # remove 11 observations in total_charges that have null values and convert to numeric type
     df = df[df.total_charges != ' ']
@@ -133,8 +111,10 @@ def prep_telco(df):
 
 def split_telco_data(df):
     '''
-    This function performs split on telco data, stratify churn.
-    Returns train, validate, and test dfs.
+    This function split telco data into train , validate, test and  stratifies on churn.
+    The split is 20% test 80% train/validate. Then 30% of 80% validate and 70% of 80% train.
+    Aproximately (train 56%, validate 24%, test 20%)
+    Returns train, validate, and test 
     '''
     train_validate, test = train_test_split(df, test_size=.2, 
                                         random_state=123, 
@@ -144,35 +124,6 @@ def split_telco_data(df):
                                    stratify=train_validate.churn)
     return train, validate, test
 
-
-def impute_mean_total_charges(train, validate, test):
-    '''
-    This function imputes the mean of the total charge column for
-    observations with missing values.
-    Returns transformed train, validate, and test df.
-    '''
-    # create the imputer object with mean strategy
-    imputer = SimpleImputer(strategy = 'mean')
-    
-    # fit on and transform total_charges  column in train
-    train['total_charges'] = imputer.fit_transform(train[['total_charges']])
-    
-    # transform total_charges  column in validate
-    validate['total_charges'] = imputer.transform(validate[['total_charges']])
-    
-    # transform total_charges  column in test
-    test['total_charges'] = imputer.transform(test[['total_charges']])
-    
-    return train, validate, test
-#---------------------- Function for train_validate_test---------------------
-def train_validate_test(df, target):
-    ''' This function takes in a dataframe and target variable to sratify and  splits the data into 
-    train , validate, test'''
-    
-    train, test = train_test_split(df, test_size=.2, random_state=123, stratify=df[target])
-    train, validate = train_test_split(train, test_size=.25, random_state=123, stratify=train[target])
-    
-    return train, validate, test
 
 
 
