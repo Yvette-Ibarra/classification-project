@@ -43,7 +43,7 @@ def model_prep(train,validate,test):
 
 def get_tree_model(x_train,y_train,x_validate,y_validate):
     ''' This function takes in train data and validate data and returns models accuracy score.
-        Train data  is used tofit Decision Tree Model. Both train and validate data is used
+        Train data  is used to fit Decision Tree Model. Both train and validate data is used
         to return the accuracy score of the Decision Tree Model
     '''
     
@@ -56,6 +56,11 @@ def get_tree_model(x_train,y_train,x_validate,y_validate):
     # Print accuracy score for train and validate data
     print(f'Accuracy of Decision Tree on train data is {tree.score(x_train, y_train)} about {round(tree.score(x_train, y_train)*100,2)}%')
     print(f'Accuracy of Decision Tree on validate data is {tree.score(x_validate, y_validate)}about {round(tree.score(x_validate, y_validate)*100,2)}%')
+
+    # find the difference in scores
+    diff = tree.score(x_train, y_train)-tree.score(x_validate, y_validate)
+    print(f'Difference between train and validate accuracy: {round(diff,4)}')
+
 
 def get_random_forest_model(x_train,y_train,x_validate,y_validate):
     ''' This function takes in train data and validate data and returns models accuracy score.
@@ -71,3 +76,49 @@ def get_random_forest_model(x_train,y_train,x_validate,y_validate):
     
     print(f'Accuracy of Random Forest on train data is {random_forest.score(x_train, y_train)} about {round(random_forest.score(x_train, y_train)*100,2)}%')
     print(f'Accuracy of Random Forest on validate data is {random_forest.score(x_validate, y_validate)} about {round(random_forest.score(x_validate, y_validate)*100,2)}%')
+
+    # find the difference in scores
+    diff = random_forest.score(x_train, y_train)-random_forest.score(x_validate, y_validate)
+    print(f'Difference between train and validate accuracy: {round(diff,4)}')
+
+def get_knn_model(x_train,y_train,x_validate,y_validate):
+    ''' This function takes in train data and validate data and returns the models accuracy score.
+        Train data  is used to fit the KNN Model. Both train and validate data is used
+        to return the accuracy score of for the KNN Model
+    '''
+    
+    # Set KNN Model parameters
+    KNN = KNeighborsClassifier(n_neighbors=25, algorithm='brute')
+   
+    # Use train data to fit KNN model
+    KNN.fit(x_train, y_train)
+    
+    print(f'Accuracy of KNN on train data is {KNN.score(x_train, y_train)} about {round(KNN.score(x_train, y_train)*100,2)}%')
+    print(f'Accuracy of KNN on validate data is {KNN.score(x_validate, y_validate)} about {round(KNN.score(x_validate, y_validate)*100,2)}%')
+   
+    # find the difference in scores
+    diff = KNN.score(x_train, y_train)-KNN.score(x_validate, y_validate)
+    print(f'Difference between train and validate accuracy: {round(diff,4)}')
+
+def get_logit_model(x_train,y_train,x_validate,y_validate):
+    ''' This function takes in train data and validate data and returns the models accuracy score.
+        Train data  is used to fit the Logistic Regression Model. Both train and validate data is used
+        to return the accuracy score of for the Logistic Regression Model
+    '''
+    
+    # Define the logistic regression model
+    logit = LogisticRegression(C=1,random_state=123)
+   
+   
+    # Use train data to fit Logistic Regression model
+    logit.fit(x_train, y_train)
+
+    # find the difference in scores
+    diff = logit.score(x_train, y_train)-logit.score(x_validate, y_validate)
+    
+    print(f'Accuracy of Logistic Regression on train data is {logit.score(x_train, y_train)} about {round(logit.score(x_train, y_train)*100,2)}%')
+    print(f'Accuracy of Logistic Regression on validate data is {logit.score(x_validate, y_validate)} about {round(logit.score(x_validate, y_validate)*100,2)}%')
+    
+    # find the difference in scores
+    diff = logit.score(x_train, y_train)-logit.score(x_validate, y_validate)
+    print(f'Difference between train and validate accuracy: {round(diff,4)}')
