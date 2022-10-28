@@ -70,16 +70,19 @@ def get_bar_senior(df):
 def get_chi2_senior(df):    
     # Chi-Square test to compare two categorical variables (senior citizen status, churn)
 
+    # Set alpha to 0.05
     alpha = 0.05
 
     # Setup a crosstab of observed 
     observed = pd.crosstab(df.senior_citizen==1, df.churn)
 
+    # Run Chi-Square test
     chi2, p, degf, expected = stats.chi2_contingency(observed)
 
+    # Round and Print results
     chi2 = chi2.round(4)
     p = p.round(4)
-    print(f' t-stat:{chi2}')
+    print(f' Chi-Square{chi2}')
     print(f' p-value:{p}')
 
 def get_boxplot_tenure(df):    
@@ -115,3 +118,72 @@ def get_ttest_tenure(df):
     p_val = p_val.round(4)
     print(f' t-stat:{t_stat}')
     print(f' p-value:{p_val}')
+
+def get_plot_contract(df):
+    plt.title('Contract Type vs Churn')
+    sns.countplot(x=df.contract_type, data=df, hue = 'churn',palette='cubehelix');
+
+def get_chi2_contract(df):    
+    # Chi-Square test to compare two categorical variables (contract type, churn)
+    # Set alpha to 0.05
+    alpha = 0.05
+
+    # Setup a crosstab of observed 
+    observed = pd.crosstab(df.contract_type, df.churn)
+    
+    # Run chi-square test
+    chi2, p, degf, expected = stats.chi2_contingency(observed)
+    
+    # Round and Print Results
+    chi2 = chi2.round(4)
+    p = p.round(4)
+    print(f' Chi-Square:{chi2}')
+    print(f' p-value:{p}')
+
+def get_plot_gender(df):   
+    plt.title('Gender Vs Churn')
+    sns.countplot(x=df.gender, data=df, hue = 'churn', palette='cubehelix')
+
+    plt.legend()
+    plt.show();
+
+def get_chi2_gender(df):    
+    # Chi-Square test to compare two categorical variables (gender, churn)
+    # Set alpha to 0.05
+    alpha = 0.05
+
+    # Setup a crosstab of observed 
+    observed = pd.crosstab(df.gender, df.churn)
+    
+    # Run chi-square test
+    chi2, p, degf, expected = stats.chi2_contingency(observed)
+    
+    # Round and Print Results
+    chi2 = chi2.round(4)
+    p = p.round(4)
+    print(f' Chi-Square:{chi2}')
+    print(f' p-value:{p}')
+
+def get_plot_partner(df):    
+    plt.title('Partner Vs Churn')
+    sns.countplot(x=df.partner, data=df, hue = 'churn', palette='cubehelix')
+
+    plt.legend()
+    plt.show();
+
+def get_chi2_partner(df):    
+    # Chi-Square test to compare two categorical variables (gender, churn)
+    # Set alpha to 0.05
+    alpha = 0.05
+
+    # Setup a crosstab of observed 
+    observed = pd.crosstab(df.partner, df.churn)
+    
+    # Run chi-square test
+    chi2, p, degf, expected = stats.chi2_contingency(observed)
+    
+    # Round and Print Results
+    chi2 = chi2.round(4)
+    p = p.round(4)
+    print(f' Chi-Square:{chi2}')
+    print(f' p-value:{p}')
