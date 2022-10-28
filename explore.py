@@ -6,14 +6,15 @@ import seaborn as sns
 
 def get_churn_mean_bar(df):
     ''' This function takes in telco data frame and returns a histoplot that
-        graphs the percentage of Telco customer who have churn
-    '''
-   
+    graphs the percentage of Telco customer who have churn'''
+    
+    sns.set_style('white')
+    
     c_percent = round(df.churn.value_counts(normalize=True)[1],3)* 100
-    plt.title(f'Customers churn by {c_percent}%')
+    plt.title(f'Customers churn by {c_percent}%',fontsize=20,fontweight= 18,color='brown')
     sns.histplot(data =df, x='churn',stat='percent',hue='churn', palette='cubehelix')
     col_mean= round(df.churn.value_counts(normalize=True)[1],3)* 100
-    plt.axhline(col_mean, label = 'Churn Rate',color='darkblue',linestyle='dashed')
+    plt.axhline(col_mean, label = 'Churn Rate',color='brown',linestyle='dashed')
    
     plt.show();
 
