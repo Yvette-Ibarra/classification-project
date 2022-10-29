@@ -34,7 +34,7 @@ def model_prep(train,validate,test):
     x_test = test.drop(columns=['churn'])
     y_test = test.churn
         
-    # Convert binary categorical targer variable to numeric
+    # Convert binary categorical target variable to numeric
     y_train.churn= train.churn.map({'Yes': 1, 'No': 0})
     y_validate.churn = validate.churn.map({'Yes': 1, 'No': 0})
     y_test.churn = test.churn.map({'Yes': 1, 'No': 0})
