@@ -15,20 +15,16 @@ My initial hypothesis is that high monthly charges cause for a Telco customer to
 
 * Prepare data
 
-  * Create Engineered columns from existing data
-    *
-    *
-
 * Explore data in search of drivers of upsets
 
   * Answer the following initial questions
     * How often does churn occur?
-    * Does monthly charges affect churn?
+    * Do customer who churn have higher monthly charges?
+    * Is the mean tenure of customers who churn lower?
     * Does having Senior Citizen status affect churn?
-    * Does tenure affect churn?
     * Does contract type affect churn?
-    * Does gender affect churn?
     * Does having a partner affect churn?
+    * Does gender affect churn?
    
   
     
@@ -62,10 +58,23 @@ My initial hypothesis is that high monthly charges cause for a Telco customer to
 
 
 # Steps to Reproduce
-* Clone this Repo
-* Must have acess Codeup Database
-* Run notebook
+1. Clone this repository
+2. Get Telco Churn data from Codeup Database:
+  * Must have acess to Codeup Database 
+  * Save a copy env.py file containing codeups: hostname, username and password
+  * Save file in cloned repository
+3. Run notebook
 
 # Takeaways and Conclusions
+* About 26.5% of Telco customers churn.
+* Customers who churn tend to:
+    * have a higher a monthly charge
+    * lower tenure mean
+* Contract type, partner status and senior status have an association with churn
+* Gender has no influence on churn
+
 
 # Recommendations
+* Have appealing incentives for customers to sign a two-year contract.
+* Run a promotion to lower monthly charges for new customers.
+* Give discounts to senior citizens
