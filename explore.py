@@ -4,24 +4,36 @@ import scipy.stats as stats
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+########################### CHURN RATE ###################################################
+
 def get_churn_mean_bar(df):
     ''' This function takes in telco data frame and returns a histoplot that
     graphs the percentage of Telco customer who have churn'''
     
+    sns.set(font_scale=1.3)  
     sns.set_style('white')
     
     c_percent = round(df.churn.value_counts(normalize=True)[1],3)* 100
-    plt.title(f'Customers churn by {c_percent}%',fontsize=20,fontweight= 18,color='brown')
+    plt.title(f'Customers churn by {c_percent}%',fontsize=25,fontweight=100,color='midnightblue')
     sns.histplot(data =df, x='churn',stat='percent',hue='churn', palette='cubehelix')
     col_mean= round(df.churn.value_counts(normalize=True)[1],3)* 100
-    plt.axhline(col_mean, label = 'Churn Rate',color='brown',linestyle='dashed')
+    plt.axhline(col_mean, label = 'Churn Rate',color='midnightblue',linestyle='dashed')
    
     plt.show();
 
+########################### MONTHLY CHARGES #############################################
+
 def get_monthly_charges(df):
-    plt.title('Monthly Charges vs Churn')
+   
+    sns.set(font_scale=1.3)  
+    sns.set_style('white')
+
+    colors = ['#6BAF8E', '#E6AFC9']
+    # Set your custom color palette
+    sns.set_palette(sns.color_palette(colors))
+    plt.title('Higher mean Monthly Charge',fontsize=25,fontweight=100,color='midnightblue')
     sns.boxplot(y=df.monthly_charges, x=df.churn,
-                whis=np.inf, palette='cubehelix'
+                whis=np.inf
                )
 
 
@@ -45,28 +57,39 @@ def get_ttest_monthly_charges(df):
     alpha = 0.05
 
     # perform T-test
-    t_stat, p_val = stats.ttest_ind(subset_churn.monthly_charges, subset_notchurn.monthly_charges, equal_var = variance, random_state=123)
+    t_stat, p_val= stats.ttest_ind(subset_churn.monthly_charges, subset_notchurn.monthly_charges, equal_var = variance, random_state=123)
    
     # Round and print results
     t_stat = t_stat.round(4)
-    p_val = p_val.round(4)
+    p_val = (p_val.round(4))/2
     print(f' t-stat:{t_stat}')
-    print(f' p-value:{p_val}')
+    print(f' p-value/2:{p_val/2}')
 
+############################## SENIOR CITIZENS ###################################
 
 def get_bar_senior(df):
-    plt.figure(figsize=(12,6))
+  
+    plt.figure(figsize=(10,4))
 
-
+    # change encoding of senior citizen to text
+    senior= df.senior_citizen.map({1:'Yes', 0: 'No'})
+    
+    # Set your custom color palette and font size
+    colors = ['#6BAF8E', '#E6AFC9']
+    sns.set(font_scale=1.3)    
+    sns.set_palette(sns.color_palette(colors))
+    sns.set_style('white')
+    
     plt.subplot(1,2,1)
-    plt.title('senior vs churn')
-    sns.countplot(x=df.senior_citizen, data=df, hue = 'churn',palette='cubehelix')
+    sns.countplot(x=senior, data= df, hue = 'churn')
 
 
     plt.subplot(1,2,2)
-    plt.title('Overlay senior vs churn')
-    sns.countplot(x=df.senior_citizen, data=df, hue = 'churn',dodge=False,palette='cubehelix')
-    plt.show()
+    sns.countplot(x=senior, data= df, hue = 'churn',dodge=False)
+
+    # Title
+    plt.suptitle('Senior Citizens Churn More',fontsize=25,fontweight=100,color='midnightblue')
+    plt.show();
 
 def get_chi2_senior(df):    
     # Chi-Square test to compare two categorical variables (senior citizen status, churn)
@@ -86,9 +109,18 @@ def get_chi2_senior(df):
     print(f' Chi-Square{chi2}')
     print(f' p-value:{p}')
 
-def get_boxplot_tenure(df):    
-    plt.title('Tenure vs Churn')
-    sns.boxplot(y=df.tenure, x=df.churn,palette='cubehelix',whis=np.inf);
+############################################## TENURE #########################################
+def get_boxplot_tenure(df):  
+
+    sns.set(font_scale=1.3)  
+    sns.set_style('white')
+
+    # Set your custom color palette
+    colors = ['#6BAF8E', '#E6AFC9']
+    sns.set_palette(sns.color_palette(colors))
+
+    plt.title('Lower mean tenure')
+    sns.boxplot(y=df.tenure, x=df.churn,whis=np.inf);
 
 def get_ttest_tenure(df):
     
@@ -116,13 +148,21 @@ def get_ttest_tenure(df):
     
     # round  and print results
     t_stat = t_stat.round(4)
-    p_val = p_val.round(4)
+    p_val = p_val.round(4)/2
     print(f' t-stat:{t_stat}')
-    print(f' p-value:{p_val}')
+    print(f' p-value/2:{p_val/2}')
+
+################################ CONTRACT TYPE #########################################
 
 def get_plot_contract(df):
+    sns.set(font_scale=1.3)  
+    sns.set_style('white')
+    # Set your custom color palette
+    colors = ['#6BAF8E', '#E6AFC9']
+    sns.set_palette(sns.color_palette(colors))
+
     plt.title('Contract Type vs Churn')
-    sns.countplot(x=df.contract_type, data=df, hue = 'churn',palette='cubehelix');
+    sns.countplot(x=df.contract_type, data=df, hue = 'churn');
 
 def get_chi2_contract(df):    
     # Chi-Square test to compare two categorical variables (contract type, churn)
@@ -141,9 +181,18 @@ def get_chi2_contract(df):
     print(f' Chi-Square:{chi2}')
     print(f' p-value:{p}')
 
-def get_plot_gender(df):   
+#################################### GENDER ###################################
+def get_plot_gender(df):  
+
+    sns.set(font_scale=1.3)  
+    sns.set_style('white')
+
+    # Set your custom color palette
+    colors = ['#6BAF8E', '#E6AFC9']
+    sns.set_palette(sns.color_palette(colors))
+
     plt.title('Gender Vs Churn')
-    sns.countplot(x=df.gender, data=df, hue = 'churn', palette='cubehelix')
+    sns.countplot(x=df.gender, data=df, hue = 'churn')
 
     plt.legend()
     plt.show();
@@ -165,9 +214,19 @@ def get_chi2_gender(df):
     print(f' Chi-Square:{chi2}')
     print(f' p-value:{p}')
 
-def get_plot_partner(df):    
+############################################# PARTNER ##################################
+
+def get_plot_partner(df):  
+
+    sns.set(font_scale=1.3)  
+    sns.set_style('white')
+
+    # Set your custom color palette
+    colors = ['#6BAF8E', '#E6AFC9']
+    sns.set_palette(sns.color_palette(colors))
+
     plt.title('Partner Vs Churn')
-    sns.countplot(x=df.partner, data=df, hue = 'churn', palette='cubehelix')
+    sns.countplot(x=df.partner, data=df, hue = 'churn')
 
     plt.legend()
     plt.show();
