@@ -16,10 +16,10 @@ def get_churn_mean_bar(df):
     sns.set_style('white')
     
     # calculate population of churn
-    c_percent = round(df.churn.value_counts(normalize=True)[1],3)* 100
+    c_percent = round(df.churn.value_counts(normalize=True)[1],2)* 100
 
     #title
-    plt.title(f'Customers churn by {c_percent}%',fontsize=25,fontweight=100,color='midnightblue')
+    plt.title(f'Customers churn by {round(c_percent)}%',fontsize=25,fontweight=100,color='midnightblue')
 
     #Create histoplot and set parameters
     sns.histplot(data =df, x='churn',stat='percent',hue='churn', palette='cubehelix')
@@ -88,10 +88,10 @@ def get_bar_senior(df):
     ''' This function takes in telco data frame and returns a two countplots that
         shows senior citizens vs churned.
     '''  
-    plt.figure(figsize=(10,4))
+    #plt.figure(figsize=(10,4))
 
     # change encoding of senior citizen to text
-    senior= df.senior_citizen.map({1:'Yes', 0: 'No'})
+    senior= df.senior_citizen.map({1:'Senior', 0: 'Not Senior'})
     
     # Set your custom color palette and font size
     colors = ['#6BAF8E', '#E6AFC9']
@@ -100,12 +100,12 @@ def get_bar_senior(df):
     sns.set_style('white')
     
     # plot count plot
-    plt.subplot(1,2,1)
+    #plt.subplot(1,2,1)
     sns.countplot(x=senior, data= df, hue = 'churn')
 
     # plot countplot overlay
-    plt.subplot(1,2,2)
-    sns.countplot(x=senior, data= df, hue = 'churn',dodge=False)
+   # plt.subplot(1,2,2)
+    #sns.countplot(x=senior, data= df, hue = 'churn',dodge=False)
 
     # Title
     plt.suptitle('Senior Citizens Churn More',fontsize=25,fontweight=100,color='midnightblue')
@@ -166,10 +166,10 @@ def get_ttest_tenure(df):
     # high p-value suggests that the populations have equal variances
     if pval < 0.05:
         variance = False
-        print('False')
+      
     else:
         variance = True
-        print('True')
+        
 
     # set alpha to 0.05
     alpha = 0.05
@@ -180,8 +180,8 @@ def get_ttest_tenure(df):
     # round  and print results
     t_stat = t_stat.round(4)
     p_val = p_val.round(4)/2
-    print(f' t-stat:{t_stat}')
-    print(f' p-value/2:{p_val/2}')
+    print(f' t-stat:  {t_stat}')
+    print(f' p-value/2:  {p_val/2}')
 
 ################################ CONTRACT TYPE #########################################
 
