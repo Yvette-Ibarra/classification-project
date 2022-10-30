@@ -19,6 +19,7 @@ def new_telco_data():
     sql query, converts telco_churn data into a dataframe and returns 
     telco_churn data as a data frame as df.
     '''
+    # create sql query to get telco churn from codeup database
     sql_query = """
                 select * from customers
                 join contract_types using (contract_type_id)
@@ -40,6 +41,7 @@ def get_telco_data():
     telco data and convert to data frame df. Returns df
     
     '''
+    # obtain csv file
     if os.path.isfile('telco.csv'):
         
         # If csv file exists read in data from csv file.
@@ -85,6 +87,7 @@ def prep_telco(df):
     
     #convert total_charges to numeric data
     df.total_charges = df.total_charges.replace(' ', np.nan).astype(float)
+
     # encode categorical drop_first set to False 'senior_citizen'gender','partner','dependents','phone_service','multiple_lines','online_security','online_backup','device_protection', 'tech_support','streaming_tv','streaming_movies','paperless_billing', 'total_charges', 'churn','contract_type','internet_service_type','payment_type'
     dummy_df = pd.get_dummies(df[[
                                     'gender','partner',
@@ -116,12 +119,16 @@ def split_telco_data(df):
     Aproximately (train 56%, validate 24%, test 20%)
     Returns train, validate, and test 
     '''
+    # split test data from train/validate
     train_validate, test = train_test_split(df, test_size=.2, 
                                         random_state=123, 
                                         stratify=df.churn)
+
+    # split train from validate
     train, validate = train_test_split(train_validate, test_size=.3, 
                                    random_state=123, 
                                    stratify=train_validate.churn)
+                                   
     return train, validate, test
 
 
