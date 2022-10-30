@@ -16,10 +16,8 @@ def model_prep(train,validate,test):
         are returned
     '''
     
-    # drop unused columns 
+    # drop unused columns and keep some features
     features = ['monthly_charges','senior_citizen','tenure','partner_No','partner_Yes','churn','contract_type_Month-to-month','contract_type_One year','contract_type_Two year']
-
-
     train = train[features]
     validate = validate[features]
     test = test[features]
