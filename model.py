@@ -52,8 +52,8 @@ def get_tree_model(x_train,y_train,x_validate,y_validate):
     tree = tree.fit(x_train, y_train)
 
     # Print accuracy score for train and validate data
-    print(f'Accuracy of Decision Tree on train data is {tree.score(x_train, y_train)} about {round(tree.score(x_train, y_train)*100,2)}%')
-    print(f'Accuracy of Decision Tree on validate data is {tree.score(x_validate, y_validate)}about {round(tree.score(x_validate, y_validate)*100,2)}%')
+    print(f'Accuracy of Decision Tree on train data is {tree.score(x_train, y_train)} about {round(tree.score(x_train, y_train)*100)}%')
+    print(f'Accuracy of Decision Tree on validate data is {tree.score(x_validate, y_validate)}about {round(tree.score(x_validate, y_validate)*100)}%')
 
     # find the difference in scores
     diff = tree.score(x_train, y_train)-tree.score(x_validate, y_validate)
@@ -72,8 +72,8 @@ def get_random_forest_model(x_train,y_train,x_validate,y_validate):
     # Use train data to fit Random Forest model
     random_forest = random_forest.fit(x_train, y_train)
     
-    print(f'Accuracy of Random Forest on train data is {random_forest.score(x_train, y_train)} about {round(random_forest.score(x_train, y_train)*100,2)}%')
-    print(f'Accuracy of Random Forest on validate data is {random_forest.score(x_validate, y_validate)} about {round(random_forest.score(x_validate, y_validate)*100,2)}%')
+    print(f'Accuracy of Random Forest on train data is {random_forest.score(x_train, y_train)} about {round(random_forest.score(x_train, y_train)*100)}%')
+    print(f'Accuracy of Random Forest on validate data is {random_forest.score(x_validate, y_validate)} about {round(random_forest.score(x_validate, y_validate)*100)}%')
 
     # find the difference in scores
     diff = random_forest.score(x_train, y_train)-random_forest.score(x_validate, y_validate)
@@ -91,8 +91,8 @@ def get_knn_model(x_train,y_train,x_validate,y_validate):
     # Use train data to fit KNN model
     KNN.fit(x_train, y_train)
     
-    print(f'Accuracy of KNN on train data is {KNN.score(x_train, y_train)} about {round(KNN.score(x_train, y_train)*100,2)}%')
-    print(f'Accuracy of KNN on validate data is {KNN.score(x_validate, y_validate)} about {round(KNN.score(x_validate, y_validate)*100,2)}%')
+    print(f'Accuracy of KNN on train data is {KNN.score(x_train, y_train)} about {round(KNN.score(x_train, y_train)*100)}%')
+    print(f'Accuracy of KNN on validate data is {KNN.score(x_validate, y_validate)} about {round(KNN.score(x_validate, y_validate)*100)}%')
    
     # find the difference in scores
     diff = KNN.score(x_train, y_train)-KNN.score(x_validate, y_validate)
@@ -116,17 +116,17 @@ def get_logit_model(x_train,y_train,x_validate,y_validate, test=False):
     # find the difference in scores
     diff = logit.score(x_train, y_train)-logit.score(x_validate, y_validate)
     
-    print(f'Accuracy of Logistic Regression on train data is {logit.score(x_train, y_train)} about {round(logit.score(x_train, y_train)*100,2)}%')
+    print(f'Accuracy of Logistic Regression on train data is {logit.score(x_train, y_train)} about {round(logit.score(x_train, y_train)*100)}%')
     
     
     # find the difference in scores
     if test == True:
-        print(f'Accuracy of Logistic Regression on test data is {logit.score(x_validate, y_validate)} about {round(logit.score(x_validate, y_validate)*100,2)}%')
+        print(f'Accuracy of Logistic Regression on test data is {logit.score(x_validate, y_validate)} about {round(logit.score(x_validate, y_validate)*100)}%')
         diff = logit.score(x_train, y_train)-logit.score(x_validate, y_validate)
         print(f'Difference between validate and test accuracy: {round(diff,4)}')
     
     else:
-        print(f'Accuracy of Logistic Regression on validate data is {logit.score(x_validate, y_validate)} about {round(logit.score(x_validate, y_validate)*100,2)}%')
+        print(f'Accuracy of Logistic Regression on validate data is {logit.score(x_validate, y_validate)} about {round(logit.score(x_validate, y_validate)*100)}%')
         diff = logit.score(x_train, y_train)-logit.score(x_validate, y_validate)
         print(f'Difference between train and validate accuracy: {round(diff,4)}')
     
