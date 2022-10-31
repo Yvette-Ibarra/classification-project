@@ -76,7 +76,7 @@ def prep_telco(df):
     # drop columns with redundant information 'payment_type_id', 'internet_service_type_id', 'contract_type_id' 
     # drop columns with unuseful information 'customer_id'
 
-    df = df.drop(columns=['payment_type_id', 'internet_service_type_id', 'contract_type_id'])
+    df = df.drop(columns=['payment_type_id', 'internet_service_type_id', 'contract_type_id','customer_id'])
     
 
     # remove 11 observations in total_charges that have null values and convert to numeric type
